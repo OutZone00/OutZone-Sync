@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event Viewer - Sunset Theme</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background: #ffefeb;
+    color: #702f2f;
+  }
+  h1 {
+    text-align: center;
+    color: #d46a6a;
+    margin-bottom: 30px;
+  }
+  form, .events {
+    background: #ffdede;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px #e1a39b;
+    margin-bottom: 30px;
+  }
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  select, button {
+    padding: 8px 12px;
+    font-size: 1em;
+    border-radius: 6px;
+    border: 1px solid #d46a6a;
+    cursor: pointer;
+  }
+  button {
+    background-color: #d46a6a;
+    color: white;
+    border: none;
+    margin-top: 15px;
+  }
+  button:hover {
+    background-color: #b15353;
+  }
+  .event-item {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d46a6a;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards ease-in;
+  }
+  .event-date {
+    color: #7a3f3f;
+    font-size: 0.9em;
+    margin-top: 4px;
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>View Events - Sunset Theme</h1>
+
+<form id="viewForm">
+  <label for="viewType">Select event type to view:</label>
+  <select id="viewType" name="viewType">
+    <option value="upcoming" selected>Upcoming Events</option>
+    <option value="past">Past Events</option>
+  </select>
+
+  <button type="button" onclick="renderEvents()">Show Events</button>
+</form>
+
+<div class="events" id="eventsContainer">
+  <!-- Event items will appear here -->
+</div>
+
+<script>
+  const events = [
+    { description: "Conference on AI", date: "2025-10-15" },
+    { description: "Project Deadline", date: "2025-08-01" },
+    { description: "Workshop on Robotics", date: "2025-09-30" },
+    { description: "Annual Meeting", date: "2025-07-20" },
+    { description: "Team Outing", date: "2025-09-10" },
+    { description: "Product Launch", date: "2025-11-05" }
+  ];
+
+  function renderEvents() {
+    const container = document.getElementById('eventsContainer');
+    const viewType = document.getElementById('viewType').value;
+    const now = new Date();
+
+    let filteredEvents = events.filter(event => {
+      const eventDate = new Date(event.date);
+      if (viewType === 'upcoming') return eventDate >= now;
+      if (viewType === 'past') return eventDate < now;
+    });
+
+    filteredEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    container.innerHTML = '';
+    if (filteredEvents.length === 0) {
+      container.innerHTML = '<p>No events to display.</p>';
+      return;
+    }
+
+    filteredEvents.forEach(event => {
+      const div = document.createElement('div');
+      div.className = 'event-item';
+      div.style.animationDelay = `${Math.random() * 0.5}s`; // stagger effect
+      div.innerHTML = `<strong>${event.description}</strong><br/><div class="event-date">${event.date}</div>`;
+      container.appendChild(div);
+    });
+  }
+
+  // Initialize with upcoming events
+  renderEvents();
+</script>
+
+</body>
+</html>
+

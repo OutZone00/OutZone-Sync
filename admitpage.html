@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modern Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #232526, #393e46 60%, #23272c);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      min-height: 100vh;
+    }
+    header {
+      background: #393e46;
+      padding: 24px 0;
+      text-align: center;
+      font-size: 2.4em;
+      font-weight: 700;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 14px #0a0a0a55;
+    }
+    nav {
+      background: #23272c;
+      padding: 14px 0;
+      display: flex;
+      justify-content: center;
+      gap: 42px;
+      font-size: 1.12em;
+    }
+    nav a {
+      color: #ffd369;
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #fff;
+      transform: translateY(-3px) scale(1.1);
+      text-shadow: 0 2px 6px #ffd36999;
+    }
+    main {
+      max-width: 540px;
+      margin: 50px auto 0 auto;
+      background: rgba(50, 51, 59, 0.97);
+      border-radius: 16px;
+      box-shadow: 0 3px 22px #1114, 0 1px 12px #0007;
+      padding: 36px 32px;
+      position: relative;
+    }
+    .admin-image {
+      width: 104px;
+      height: 104px;
+      border-radius: 22px;
+      display: block;
+      margin: 0 auto 28px;
+      box-shadow: 0 3px 18px #0005;
+      object-fit: cover;
+      background: #1a1b1d;
+    }
+    h2 {
+      font-size: 1.44em;
+      color: #ffd369;
+      margin: 0 0 20px 0;
+      text-align: center;
+    }
+    ul {
+      margin: 0 0 0 22px;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      font-size: 1.09em;
+      padding: 10px 0;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      border-radius: 6px;
+      transition: background 0.12s, color 0.12s, transform 0.10s;
+      gap: 12px;
+    }
+    li:hover {
+      background: #ffd36922;
+      color: #ffd369;
+      transform: scale(1.03);
+    }
+    .icon {
+      font-size: 1.34em;
+      margin-right: 10px;
+    }
+
+    /* Modal Styles */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(44,44,55,0.43);
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.2s;
+    }
+    .modal-bg.active {
+      display: flex;
+    }
+    .modal {
+      background: #23272c;
+      padding: 32px 26px;
+      border-radius: 16px;
+      box-shadow: 0 6px 26px #0007;
+      color: #fff;
+      font-size: 1.16em;
+      max-width: 93vw;
+      min-width: 240px;
+      position: relative;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.6em;
+      color: #ffd369;
+      cursor: pointer;
+      transition: color 0.18s;
+    }
+    .close-btn:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 680px) {
+      main {max-width: 100vw; padding: 8vw 3vw;}
+      header {font-size: 1.23em;}
+    }
+  </style>
+</head>
+<body>
+<header>Admin Dashboard Features</header>
+<nav>
+  <a href="home.html" target="_blank">Home</a>
+  <a href="pastevent (1).html" target="_blank">Events</a>
+  <a href="">Participants</a>
+  <a href="certificate2.html" target="_blank">Certificates</a>
+</nav>
+<main>
+  <img class="admin-image" src="https://s3.amazonaws.com/static.the-next-tech.com/wp-content/uploads/2022/02/25121957/New-Project-66.jpg" alt="Admin Features">
+  <h2>For Admins</h2>
+  <ul>
+    <a href="admin.html"><li onclick="showInfo(0)"><span class="icon">🔑</span>Admin login</li></a>
+    
+    <li onclick="showInfo(1)"><span class="icon">🗓️</span>Create / update / delete events</li>
+    <li onclick="showInfo(2)"><span class="icon">👥</span>View list of participants</li>
+    <a href="certificate2.html"><li onclick="showInfo(3)"><span class="icon">🎓</span>Upload or auto-generate certificates</li></a>
+  </ul>
+</main>
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <button class="close-btn" onclick="closeModal()">×</button>
+    <div id="modal-text"></div>
+  </div>
+</div>
+<script>
+  const infoTexts = [
+    "Allows administrators to securely access and manage the dashboard.",
+    "Admins can create, update, or delete events from the system.",
+    "View and manage the list of all registered participants.",
+    "Admins can upload certificates or generate them automatically for participants."
+  ];
+  function showInfo(idx) {
+    document.getElementById('modal-text').textContent = infoTexts[idx];
+    document.getElementById('modal-bg').classList.add('active');
+  }
+  function closeModal() {
+    document.getElementById('modal-bg').classList.remove('active');
+  }
+</script>
+</body>
+</html>
